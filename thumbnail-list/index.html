@@ -1,0 +1,72 @@
+<head>
+  <script src="http://fb.me/react-0.13.0.js"></script>
+  <script src="http://fb.me/JSXTransformer-0.13.0.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+</head>
+<body>
+  <div class='container'>
+    <div class='row target'>
+      <!-- <div class='col-sm-6 col-md-4 target'>
+      </div> -->
+    </div>
+  </div>
+</body>
+
+<script type="text/jsx">
+  var Badge = React.createClass({
+    render: function() {
+      return <button className="btn btn-primary" type="button">
+        {this.props.label} <span className="badge">{this.props.number}</span>
+        </button>
+    }
+  });
+
+  var Thumbnail = React.createClass({
+    render: function() {
+      return <div className="thumbnail">
+      <img src={this.props.imageUrl} alt={this.props.description} />
+      <div className="caption">
+        <h3>{this.props.header}</h3>
+        <p>{this.props.description}</p>
+        <p>
+          <Badge label={this.props.label} number={this.props.number} />
+        </p>
+      </div>
+    </div>
+    }
+  });
+
+  var ThumbnailList = React.createClass({
+    render: function() {
+      var list = this.props.thumbnailData.map(function(thumbnailProps){
+        return <div className='col-sm-3 col-md-4 target'><Thumbnail {...thumbnailProps} /></div>
+      });
+      return <div>
+        {list}
+      </div>
+    }
+  });
+
+  var options = {
+  thumbnailData: [{
+      label : "See tutorials",
+      number : 32,
+      imageUrl : 'http://formatjs.io/img/react.svg',
+      header : 'Learn React',
+      description : 'React is a fantasic new library for making dynamic pages'
+    },{
+        label : "See tutorials",
+        number : 64,
+        imageUrl : 'http://brunch.io/images/others/gulp.png',
+        header : 'Learn Gulp',
+        description : 'Gulp will speed up your development workflow'
+      }
+    ]
+  };
+
+  var element = React.createElement(ThumbnailList, options);
+
+  React.render(element, document.querySelector('.target'));
+
+</script>
